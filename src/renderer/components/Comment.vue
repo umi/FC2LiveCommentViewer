@@ -254,7 +254,7 @@
 						if (this.$store.getters['Config/bouyomi'] !== 1) {
 							break
 						}
-						if (comments.ng_comment_keyword || comments.ng_comment_user) {
+						if (comment.ng_comment_keyword || comment.ng_comment_user) {
 							continue
 						}
 						let res = await bouyomiSocket.send(comment.comment)
