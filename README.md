@@ -1,9 +1,8 @@
-# FC2 Live CommentViewer
+# FC2LiveCommentViewer
+[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)  
+FC2 LiveのコメントAPI利用サンプル
 
-> Usage example of the fc2 live comment api.
-
-#### Build Setup
-
+### Build Setup
 ``` bash
 # install dependencies
 npm install
@@ -13,16 +12,8 @@ npm run dev
 
 # build electron application for production
 npm run build
-
-# run unit & end-to-end tests
-npm test
-
-
-# lint all JS/Vue component files in `src/`
-npm run lint
-
 ```
-
 ---
 
-This project was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue)@[7c4e3e9](https://github.com/SimulatedGREG/electron-vue/tree/7c4e3e90a772bd4c27d2dd4790f61f09bae0fcef) using [vue-cli](https://github.com/vuejs/vue-cli). Documentation about the original structure can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).
+### ライセンス
+[MIT License](LICENSE)
