@@ -103,7 +103,6 @@ const actions = {
 	},
 	setBouyomiPort (state, port) {
 		const bouyomiPort = port !== '' ? ~~port : 50001
-		console.log(bouyomiPort, port)
 		state.commit('SET_BOUYOMI_PORT', bouyomiPort)
 		localStorage.setItem('config_bouyomi_port', bouyomiPort)
 	},

@@ -16,7 +16,7 @@
 					<input ref="token" @change="changeToken" type="text" v-bind:value="token">
 				</div>
 
-				<div v-if="true || platform === 'win32'" class="check_group">
+				<div v-if="platform === 'win32'" class="check_group">
 					<label for="bouyomi_checkbox">
 						<input @change="changeBouyomi" type="checkbox" id="bouyomi_checkbox" name="bouyomi_checkbox" v-model="check_bouyomi">
 						<span>Bouyomi chan</span>
