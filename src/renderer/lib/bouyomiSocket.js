@@ -43,11 +43,8 @@ export default class {
 	}
 
 	_jsonStrDecode (str) {
-		const r = /\\u([\d\w]{4})/gi
-		const decode = str.replace(r, (match, grp) => {
+		return str.replace(/\\u([a-fA-F0-9]{4})/g, (match, grp) => {
 			return String.fromCharCode(parseInt(grp, 16))
 		})
-
-		return unescape(decode)
 	}
 }
