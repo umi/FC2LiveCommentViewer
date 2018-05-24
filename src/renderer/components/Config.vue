@@ -16,11 +16,12 @@
 					<input ref="token" @change="changeToken" type="text" v-bind:value="token">
 				</div>
 
-				<div v-if="platform === 'win32'" class="check_group">
+				<div v-if="true || platform === 'win32'" class="check_group">
 					<label for="bouyomi_checkbox">
 						<input @change="changeBouyomi" type="checkbox" id="bouyomi_checkbox" name="bouyomi_checkbox" v-model="check_bouyomi">
 						<span>Bouyomi chan</span>
 					</label>
+					<input ref="bouyomiPort" @change="changePort" type="text" pattern="\d*" maxlength="5" placeholder="50001" v-bind:value="bouyomiPort">
 				</div>
 			</div>
 
@@ -143,6 +144,9 @@
 			style () {
 				return this.$store.getters['Config/style']
 			},
+			bouyomiPort () {
+				return this.$store.getters['Config/bouyomi_port']
+			},
 			configStyle () {
 				return {
 					comment_head: {
@@ -189,6 +193,9 @@
 			changeToken () {
 				this.$store.dispatch('Config/setToken', this.$refs.token.value)
 				this.$store.dispatch('Comment/clear')
+			},
+			changePort () {
+				this.$store.dispatch('Config/setBouyomiPort', this.$refs.bouyomiPort.value)
 			},
 			changeStyle () {
 				this.$store.dispatch('Config/setStyle', {
@@ -349,6 +356,12 @@
 						border-width: 0 2px 2px 0;
 						transform: rotate(45deg);
 					}
+				}
+
+				input[type="text"] {
+					color: #999;
+					width: 50px;
+					padding: 2px 5px;
 				}
 			}
 

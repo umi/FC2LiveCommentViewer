@@ -85,6 +85,9 @@
 			bouyomi () {
 				return this.$store.getters['Config/bouyomi']
 			},
+			bouyomiPort () {
+				return this.$store.getters['Config/bouyomi_port']
+			},
 			comments () {
 				return this.$store.getters['Comment/commentList']
 			},
@@ -257,7 +260,7 @@
 						if (comment.ng_comment_keyword || comment.ng_comment_user) {
 							continue
 						}
-						let res = await bouyomiSocket.send(comment.comment)
+						let res = await bouyomiSocket.send(comment.comment, this.bouyomiPort)
 						yield res
 					}
 				} catch (e) {

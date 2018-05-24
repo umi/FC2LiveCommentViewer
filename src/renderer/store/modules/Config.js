@@ -38,7 +38,8 @@ const state = {
 	token: nvl(localStorage.getItem('config_token'), ''),
 	style: _.defaults(_.omitBy(storedStyle, (obj) => _.isEmpty(obj)), defaultStyle),
 	style_type: nvl(localStorage.getItem('config_style_type'), 1),
-	bouyomi: ~~nvl(localStorage.getItem('config_bouyomi'), 0)
+	bouyomi: ~~nvl(localStorage.getItem('config_bouyomi'), 0),
+	bouyomi_port: ~~nvl(localStorage.getItem('config_bouyomi_port'), 50001)
 }
 
 const mutations = {
@@ -56,6 +57,9 @@ const mutations = {
 	},
 	SET_BOUYOMI (state, type) {
 		state.bouyomi = type
+	},
+	SET_BOUYOMI_PORT (state, port) {
+		state.bouyomi_port = port
 	}
 }
 
@@ -94,9 +98,14 @@ const actions = {
 	},
 	setBouyomi (state, type) {
 		const useBouyomi = type ? 1 : 0
-		console.log(useBouyomi)
 		state.commit('SET_BOUYOMI', useBouyomi)
 		localStorage.setItem('config_bouyomi', useBouyomi)
+	},
+	setBouyomiPort (state, port) {
+		const bouyomiPort = port !== '' ? ~~port : 50001
+		console.log(bouyomiPort, port)
+		state.commit('SET_BOUYOMI_PORT', bouyomiPort)
+		localStorage.setItem('config_bouyomi_port', bouyomiPort)
 	},
 	clear (state) {
 		state.commit('SET_CHANNEL', '')
@@ -104,6 +113,7 @@ const actions = {
 		state.commit('SET_STYLE', defaultStyle)
 		state.commit('SET_STYLE_TYPE', '1')
 		state.commit('SET_BOUYOMI', 0)
+		state.commit('SET_BOUYOMI_PORT', 50001)
 		localStorage.clear()
 	}
 }
@@ -113,7 +123,8 @@ const getters = {
 	token (state) { return state.token },
 	style (state) { return state.style },
 	style_type (state) { return state.style_type },
-	bouyomi (state) { return state.bouyomi }
+	bouyomi (state) { return state.bouyomi },
+	bouyomi_port (state) { return state.bouyomi_port }
 }
 
 export default {
