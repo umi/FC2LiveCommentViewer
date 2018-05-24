@@ -19,13 +19,13 @@ export default class {
 		})
 	}
 
-	send (msg, port = '50001') {
+	send (msg, port = 50001) {
 		this.reject()
 		this.promise = new Promise((resolve, reject) => {
 			this.resolve = resolve
 			this.reject = reject
 
-			const messageBuffer = Buffer.from(msg, 'utf8')
+			const messageBuffer = Buffer.from(this._jsonStrDecode(msg), 'utf8')
 			this.buffer = Buffer.alloc(15 + messageBuffer.length)
 			this.buffer.writeUInt16LE(0x0001, 0)
 			this.buffer.writeUInt16LE(0xFFFF, 2)
@@ -40,5 +40,14 @@ export default class {
 		})
 
 		return this.promise
+	}
+
+	_jsonStrDecode (str) {
+		const r = /\\u([\d\w]{4})/gi
+		const decode = str.replace(r, (match, grp) => {
+			return String.fromCharCode(parseInt(grp, 16))
+		})
+
+		return unescape(decode)
 	}
 }
