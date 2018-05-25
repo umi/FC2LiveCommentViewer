@@ -40,8 +40,8 @@ class CommentManager {
 								if (comment.system_comment) {
 									if (comment.system_comment.type === 'tip') {
 										comment.type.push('tip')
-										comment.user_name = ''
 										comment.comment = `${comment.system_comment.tip_amount} pt を${comment.user_name}さんがチップしました。`
+										comment.user_name = ''
 									}
 								}
 								if (comment.ng_comment_keyword) {
