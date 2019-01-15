@@ -44,7 +44,7 @@ class CommentManager {
 										comment.comment = `${comment.system_comment.tip_amount} pt を${comment.user_name}さんがチップしました。`
 									} else if (comment.system_comment.type === 'gift') {
 										comment.type.push('gift')
-										comment.comment = `${this.giftList[comment.system_comment.gift_id]} を${comment.user_name}さんがプレゼントました。`
+										comment.comment = `${this.giftList[comment.system_comment.gift_id]} を${comment.user_name}さんがプレゼントしました。`
 									}
 									comment.user_name = ''
 									if (comment.ng_name) {
