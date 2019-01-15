@@ -10,10 +10,10 @@ const defaultStyle = {
 	commentColor: '333333',
 	hashColor: '808080',
 	timeColor: '808080',
-	tipBg: 'fceeb6',
-	tipHash: '808080',
-	tipTime: '808080',
-	tipComment: '333333'
+	systemBg: 'fceeb6',
+	systemHash: '808080',
+	systemTime: '808080',
+	systemComment: '333333'
 }
 const darkStyle = {
 	lineBg: '222222',
@@ -21,10 +21,10 @@ const darkStyle = {
 	commentColor: 'eeeeee',
 	hashColor: '999999',
 	timeColor: '999999',
-	tipBg: '555555',
-	tipHash: '808050',
-	tipTime: '808050',
-	tipComment: 'eeee66'
+	systemBg: '555555',
+	systemHash: '808050',
+	systemTime: '808050',
+	systemComment: 'eeee66'
 }
 
 var storedStyle = null

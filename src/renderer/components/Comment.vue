@@ -3,16 +3,16 @@
 		<input ref="slider" type="range" v-model="nameWidth" min="0" :max="sliderWidth">
 		<ul @scroll="onScroll" ref="comment" class="comments" v-bind:style="configStyle.comment_box">
 			<li v-for="comment in comments">
-				<div v-if="comment.type.indexOf('tip') !== -1" class="comment_head" v-bind:style="configStyle.tip_head">
-					<div class="hash" v-bind:style="configStyle.tip_hash">{{ comment.hash }}</div>
-					<div class="time" v-bind:style="configStyle.tip_time">{{ comment.time }}</div>
+				<div v-if="comment.type.indexOf('tip') !== -1 || comment.type.indexOf('gift') !== -1" class="comment_head" v-bind:style="configStyle.system_head">
+					<div class="hash" v-bind:style="configStyle.system_hash">{{ comment.hash }}</div>
+					<div class="time" v-bind:style="configStyle.system_time">{{ comment.time }}</div>
 				</div>
 				<div v-else class="comment_head" v-bind:style="configStyle.comment_head">
 					<div class="hash" v-bind:style="configStyle.hash">{{ comment.hash }}</div>
 					<div class="time" v-bind:style="configStyle.time">{{ comment.time }}</div>
 				</div>
-				<div v-if="comment.type.indexOf('tip') !== -1" class="comment_body" v-bind:style="configStyle.tip_body">
-					<div class="comment_text" v-bind:style="[configStyle.tip_comment_text]">{{ comment.comment }}</div>
+				<div v-if="comment.type.indexOf('tip') !== -1 || comment.type.indexOf('gift') !== -1" class="comment_body" v-bind:style="configStyle.system_body">
+					<div class="comment_text" v-bind:style="[configStyle.system_comment_text]">{{ comment.comment }}</div>
 				</div>
 				<div v-else class="comment_body" v-bind:style="configStyle.comment_body">
 					<div class="user_name" v-bind:class="{ ng_name: comment.type.indexOf('ngName') !== -1 }" v-bind:style="[userNameStyle, configStyle.user_name]">{{ comment.user_name }}</div>
@@ -123,20 +123,20 @@
 					time: {
 						color: '#' + this.$store.getters['Config/style'].timeColor
 					},
-					tip_head: {
-						background: '#' + this.$store.getters['Config/style'].tipBg
+					system_head: {
+						background: '#' + this.$store.getters['Config/style'].systemBg
 					},
-					tip_body: {
-						background: '#' + this.$store.getters['Config/style'].tipBg
+					system_body: {
+						background: '#' + this.$store.getters['Config/style'].systemBg
 					},
-					tip_comment_text: {
-						color: '#' + this.$store.getters['Config/style'].tipComment
+					system_comment_text: {
+						color: '#' + this.$store.getters['Config/style'].systemComment
 					},
-					tip_hash: {
-						color: '#' + this.$store.getters['Config/style'].tipHash
+					system_hash: {
+						color: '#' + this.$store.getters['Config/style'].systemHash
 					},
-					tip_time: {
-						color: '#' + this.$store.getters['Config/style'].tipTime
+					system_time: {
+						color: '#' + this.$store.getters['Config/style'].systemTime
 					}
 				}
 			}
@@ -257,7 +257,7 @@
 						if (this.$store.getters['Config/bouyomi'] !== 1) {
 							break
 						}
-						if (comment.ng_comment_keyword || comment.ng_comment_user) {
+						if (comment.ng_comment_keyword || comment.ng_comment_user || comment.comment === '') {
 							continue
 						}
 						let res = await bouyomiSocket.send(comment.comment, this.bouyomiPort)

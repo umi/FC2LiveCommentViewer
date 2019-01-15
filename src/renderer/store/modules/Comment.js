@@ -8,6 +8,7 @@ class CommentManager {
 		this.reject = function () {}
 		this.anonymousList = []
 		this.anonymousNum = 1
+		this.giftList = ['風船', 'ハート', 'ダイヤ']
 	}
 	loadData (channel, token) {
 		if (this.channel !== channel) {
@@ -41,7 +42,13 @@ class CommentManager {
 									if (comment.system_comment.type === 'tip') {
 										comment.type.push('tip')
 										comment.comment = `${comment.system_comment.tip_amount} pt を${comment.user_name}さんがチップしました。`
-										comment.user_name = ''
+									} else if (comment.system_comment.type === 'gift') {
+										comment.type.push('gift')
+										comment.comment = `${this.giftList[comment.system_comment.gift_id]} を${comment.user_name}さんがプレゼントました。`
+									}
+									comment.user_name = ''
+									if (comment.ng_name) {
+										comment.comment = '--NGｷｰﾜｰﾄﾞが含まれるｺﾒﾝﾄです--'
 									}
 								}
 								if (comment.ng_comment_keyword) {

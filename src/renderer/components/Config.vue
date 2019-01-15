@@ -71,23 +71,23 @@
 				</div>
 
 				<div class="input_group color">
-					<div class="label">tip hash color</div>
-					<input ref="tipHash" @change="changeStyle" type="text" maxlength="6" v-bind:value="style.tipHash">
+					<div class="label">system hash color</div>
+					<input ref="systemHash" @change="changeStyle" type="text" maxlength="6" v-bind:value="style.systemHash">
 				</div>
 
 				<div class="input_group color">
-					<div class="label">tip time color</div>
-					<input ref="tipTime" @change="changeStyle" type="text" maxlength="6" v-bind:value="style.tipTime">
+					<div class="label">system time color</div>
+					<input ref="systemTime" @change="changeStyle" type="text" maxlength="6" v-bind:value="style.systemTime">
 				</div>
 
 				<div class="input_group color">
-					<div class="label">tip comment color</div>
-					<input ref="tipComment" @change="changeStyle" type="text" maxlength="6" v-bind:value="style.tipComment">
+					<div class="label">system comment color</div>
+					<input ref="systemComment" @change="changeStyle" type="text" maxlength="6" v-bind:value="style.systemComment">
 				</div>
 
 				<div class="input_group color">
-					<div class="label">tip background color</div>
-					<input ref="tipBg" @change="changeStyle" type="text" maxlength="6" v-bind:value="style.tipBg">
+					<div class="label">system background color</div>
+					<input ref="systemBg" @change="changeStyle" type="text" maxlength="6" v-bind:value="style.systemBg">
 				</div>
 			</div>
 
@@ -107,7 +107,7 @@
 						<div class="hash" v-bind:style="configStyle.tip_hash">00000000000000000000000000000000</div>
 						<div class="time" v-bind:style="configStyle.tip_time">00:00:00</div>
 					</div>
-					<div class="comment_body" v-bind:style="configStyle.tip_body">
+					<div class="comment_body" v-bind:style="configStyle.system_body">
 						<div class="comment_text" v-bind:style="configStyle.tip_comment_text">100 pt を匿名(1)さんがチップしました。</div>
 					</div>
 				</li>
@@ -168,19 +168,19 @@
 						color: '#' + this.$store.getters['Config/style'].timeColor
 					},
 					tip_head: {
-						background: '#' + this.$store.getters['Config/style'].tipBg
+						background: '#' + this.$store.getters['Config/style'].systemBg
 					},
-					tip_body: {
-						background: '#' + this.$store.getters['Config/style'].tipBg
+					system_body: {
+						background: '#' + this.$store.getters['Config/style'].systemBg
 					},
 					tip_comment_text: {
-						color: '#' + this.$store.getters['Config/style'].tipComment
+						color: '#' + this.$store.getters['Config/style'].systemComment
 					},
 					tip_hash: {
-						color: '#' + this.$store.getters['Config/style'].tipHash
+						color: '#' + this.$store.getters['Config/style'].systemHash
 					},
 					tip_time: {
-						color: '#' + this.$store.getters['Config/style'].tipTime
+						color: '#' + this.$store.getters['Config/style'].systemTime
 					}
 				}
 			}
@@ -204,10 +204,10 @@
 					commentColor: this.$refs.commentColor.value,
 					hashColor: this.$refs.hashColor.value,
 					timeColor: this.$refs.timeColor.value,
-					tipBg: this.$refs.tipBg.value,
-					tipComment: this.$refs.tipComment.value,
-					tipHash: this.$refs.tipHash.value,
-					tipTime: this.$refs.tipTime.value
+					systemBg: this.$refs.systemBg.value,
+					systemComment: this.$refs.systemComment.value,
+					systemHash: this.$refs.systemHash.value,
+					systemTime: this.$refs.systemTime.value
 				})
 				this.radio_style_type = '3'
 				this.changeStyleType()
