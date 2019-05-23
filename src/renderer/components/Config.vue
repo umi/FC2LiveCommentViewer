@@ -13,7 +13,7 @@
 
 				<div class="input_group">
 					<div class="label">token</div>
-					<input ref="token" @change="changeToken" type="text" v-bind:value="token">
+					<input ref="token" @change="changeToken" type="password" v-bind:value="token">
 				</div>
 
 				<div v-if="platform === 'win32'" class="check_group">
