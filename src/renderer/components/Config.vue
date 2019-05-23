@@ -23,6 +23,13 @@
 					</label>
 					<input ref="bouyomiPort" @change="changePort" type="text" pattern="\d*" maxlength="5" placeholder="50001" v-bind:value="bouyomiPort">
 				</div>
+
+				<div class="check_group">
+					<label for="display_index_checkbox">
+						<input @change="changeDisplayIndex" type="checkbox" id="display_index_checkbox" name="display_index_checkbox" v-model="check_display_index">
+						<span>Comment Index</span>
+					</label>
+				</div>
 			</div>
 
 			<div class="title">
@@ -131,7 +138,8 @@
 			return {
 				radio_style_type: '1',
 				platform: require('os').platform(),
-				check_bouyomi: false
+				check_bouyomi: false,
+				check_display_index: false
 			}
 		},
 		computed: {
@@ -218,6 +226,9 @@
 			changeBouyomi () {
 				this.$store.dispatch('Config/setBouyomi', this.check_bouyomi)
 			},
+			changeDisplayIndex () {
+				this.$store.dispatch('Config/setDisplayIndex', this.check_display_index)
+			},
 			clearData () {
 				this.$store.dispatch('Config/clear')
 				this.$store.dispatch('Comment/clear')
@@ -228,9 +239,11 @@
 			this.$nextTick(function () {
 				const style = this.$store.getters['Config/style_type']
 				const bouyomi = this.$store.getters['Config/bouyomi']
+				const displayIndex = this.$store.getters['Config/display_index']
 				this.$refs['theme' + style].checked = true
 				this.radio_style_type = style
 				this.check_bouyomi = bouyomi === 1
+				this.check_display_index = displayIndex === 1
 			})
 		}
 	}

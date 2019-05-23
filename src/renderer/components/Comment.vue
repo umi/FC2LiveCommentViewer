@@ -15,7 +15,7 @@
 					<div class="comment_text" v-bind:style="[configStyle.system_comment_text]">{{ comment.comment }}</div>
 				</div>
 				<div v-else class="comment_body" v-bind:style="configStyle.comment_body">
-					<div class="user_name" v-bind:class="{ ng_name: comment.type.indexOf('ngName') !== -1 }" v-bind:style="[userNameStyle, configStyle.user_name]">{{ comment.user_name }}</div>
+					<div class="user_name" v-bind:class="{ ng_name: comment.type.indexOf('ngName') !== -1 }" v-bind:style="[userNameStyle, configStyle.user_name]"><span v-bind:style="configStyle.display_index">[{{ comment.index }}] </span>{{ comment.user_name }}</div>
 					<div class="comment_text" v-bind:class="{ ng_keyword: comment.type.indexOf('ngKeyword') !== -1, ng_user: comment.type.indexOf('ngUser') !== -1 }" v-bind:style="[configStyle.comment_text]">{{ comment.comment }}</div>
 				</div>
 			</li>
@@ -137,6 +137,9 @@
 					},
 					system_time: {
 						color: '#' + this.$store.getters['Config/style'].systemTime
+					},
+					display_index: {
+						display: this.$store.getters['Config/display_index'] ? 'inline' : 'none'
 					}
 				}
 			}

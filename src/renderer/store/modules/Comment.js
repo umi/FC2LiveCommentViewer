@@ -28,9 +28,13 @@ class CommentManager {
 					if (data.status === 0) {
 						this.loadCount++
 						let comments = []
-						if (data.comments.length > 0) {
+						if (this.index < data.last_comment_index) {
 							this.index = data.last_comment_index
+						}
+						if (data.comments.length > 0) {
+							let count = this.index - (data.comments.length - 1)
 							data.comments.forEach((comment) => {
+								comment.index = count++
 								comment.type = []
 								if (comment.anonymous) {
 									comment.user_name = `匿名(${this.getAnonymousNum(comment.hash)})`

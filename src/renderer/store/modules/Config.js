@@ -39,7 +39,8 @@ const state = {
 	style: _.defaults(_.omitBy(storedStyle, (obj) => _.isEmpty(obj)), defaultStyle),
 	style_type: nvl(localStorage.getItem('config_style_type'), 1),
 	bouyomi: ~~nvl(localStorage.getItem('config_bouyomi'), 0),
-	bouyomi_port: ~~nvl(localStorage.getItem('config_bouyomi_port'), 50001)
+	bouyomi_port: ~~nvl(localStorage.getItem('config_bouyomi_port'), 50001),
+	display_index: ~~nvl(localStorage.getItem('config_display_index'), 0)
 }
 
 const mutations = {
@@ -60,6 +61,9 @@ const mutations = {
 	},
 	SET_BOUYOMI_PORT (state, port) {
 		state.bouyomi_port = port
+	},
+	SET_DISPLAY_INDEX (state, type) {
+		state.display_index = type
 	}
 }
 
@@ -106,6 +110,11 @@ const actions = {
 		state.commit('SET_BOUYOMI_PORT', bouyomiPort)
 		localStorage.setItem('config_bouyomi_port', bouyomiPort)
 	},
+	setDisplayIndex (state, type) {
+		const displayIndex = type ? 1 : 0
+		state.commit('SET_DISPLAY_INDEX', displayIndex)
+		localStorage.setItem('config_display_index', displayIndex)
+	},
 	clear (state) {
 		state.commit('SET_CHANNEL', '')
 		state.commit('SET_TOKEN', '')
@@ -113,6 +122,7 @@ const actions = {
 		state.commit('SET_STYLE_TYPE', '1')
 		state.commit('SET_BOUYOMI', 0)
 		state.commit('SET_BOUYOMI_PORT', 50001)
+		state.commit('SET_DISPLAY_INDEX', 0)
 		localStorage.clear()
 	}
 }
@@ -123,7 +133,8 @@ const getters = {
 	style (state) { return state.style },
 	style_type (state) { return state.style_type },
 	bouyomi (state) { return state.bouyomi },
-	bouyomi_port (state) { return state.bouyomi_port }
+	bouyomi_port (state) { return state.bouyomi_port },
+	display_index (state) { return state.display_index }
 }
 
 export default {
