@@ -40,7 +40,8 @@ const state = {
 	style_type: nvl(localStorage.getItem('config_style_type'), 1),
 	bouyomi: ~~nvl(localStorage.getItem('config_bouyomi'), 0),
 	bouyomi_port: ~~nvl(localStorage.getItem('config_bouyomi_port'), 50001),
-	display_index: ~~nvl(localStorage.getItem('config_display_index'), 0)
+	display_index: ~~nvl(localStorage.getItem('config_display_index'), 0),
+	ignore_system_error: ~~nvl(localStorage.getItem('config_ignore_system_error'), 0)
 }
 
 const mutations = {
@@ -64,6 +65,9 @@ const mutations = {
 	},
 	SET_DISPLAY_INDEX (state, type) {
 		state.display_index = type
+	},
+	SET_IGNORE_SYSTEM_ERROR (state, type) {
+		state.ignore_system_error = type
 	}
 }
 
@@ -115,6 +119,11 @@ const actions = {
 		state.commit('SET_DISPLAY_INDEX', displayIndex)
 		localStorage.setItem('config_display_index', displayIndex)
 	},
+	setIgnoreSystemError (state, type) {
+		const ignoreSystemError = type ? 1 : 0
+		state.commit('SET_IGNORE_SYSTEM_ERROR', ignoreSystemError)
+		localStorage.setItem('config_ignore_system_error', ignoreSystemError)
+	},
 	clear (state) {
 		state.commit('SET_CHANNEL', '')
 		state.commit('SET_TOKEN', '')
@@ -123,6 +132,7 @@ const actions = {
 		state.commit('SET_BOUYOMI', 0)
 		state.commit('SET_BOUYOMI_PORT', 50001)
 		state.commit('SET_DISPLAY_INDEX', 0)
+		state.commit('SET_IGNORE_SYSTEM_ERROR', 0)
 		localStorage.clear()
 	}
 }
@@ -134,7 +144,8 @@ const getters = {
 	style_type (state) { return state.style_type },
 	bouyomi (state) { return state.bouyomi },
 	bouyomi_port (state) { return state.bouyomi_port },
-	display_index (state) { return state.display_index }
+	display_index (state) { return state.display_index },
+	ignore_system_error (state) { return state.ignore_system_error }
 }
 
 export default {

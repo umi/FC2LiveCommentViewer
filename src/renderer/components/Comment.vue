@@ -100,6 +100,9 @@
 			sliderWidth () {
 				return this.width - 10
 			},
+			ignoreSystemError () {
+				return this.$store.getters['Config/ignore_system_error']
+			},
 			configStyle () {
 				return {
 					comment_box: {
@@ -219,6 +222,14 @@
 						case '98':
 						case '99':
 						default:
+							if (this.ignoreSystemError === 1) {
+								this.timer = setTimeout(() => {
+									if (this.syncStatus === 1) {
+										this.sync()
+									}
+								}, 1000)
+								return
+							}
 							options.title = ''
 							options.message = 'エラーが発生しました'
 							options.detail = `システムエラーが発生しました。(${err.message})`

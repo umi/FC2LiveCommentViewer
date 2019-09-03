@@ -30,6 +30,13 @@
 						<span>Comment Index</span>
 					</label>
 				</div>
+
+				<div class="check_group">
+					<label for="ignore_system_error_checkbox">
+						<input @change="changeIgnoreSystemError" type="checkbox" id="ignore_system_error_checkbox" name="ignore_system_error_checkbox" v-model="check_ignore_system_error">
+						<span>システムエラーを無視する</span>
+					</label>
+				</div>
 			</div>
 
 			<div class="title">
@@ -139,7 +146,8 @@
 				radio_style_type: '1',
 				platform: require('os').platform(),
 				check_bouyomi: false,
-				check_display_index: false
+				check_display_index: false,
+				check_ignore_system_error: false
 			}
 		},
 		computed: {
@@ -229,6 +237,9 @@
 			changeDisplayIndex () {
 				this.$store.dispatch('Config/setDisplayIndex', this.check_display_index)
 			},
+			changeIgnoreSystemError () {
+				this.$store.dispatch('Config/setIgnoreSystemError', this.check_ignore_system_error)
+			},
 			clearData () {
 				this.$store.dispatch('Config/clear')
 				this.$store.dispatch('Comment/clear')
@@ -240,10 +251,12 @@
 				const style = this.$store.getters['Config/style_type']
 				const bouyomi = this.$store.getters['Config/bouyomi']
 				const displayIndex = this.$store.getters['Config/display_index']
+				const ignoreSystemError = this.$store.getters['Config/ignore_system_error']
 				this.$refs['theme' + style].checked = true
 				this.radio_style_type = style
 				this.check_bouyomi = bouyomi === 1
 				this.check_display_index = displayIndex === 1
+				this.check_ignore_system_error = ignoreSystemError === 1
 			})
 		}
 	}
