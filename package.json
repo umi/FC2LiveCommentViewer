@@ -1,6 +1,6 @@
 {
   "name": "fc2live-comment",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "author": "umi",
   "description": "Comment viewer for FC2 Live",
   "license": "MIT",
@@ -84,7 +84,7 @@
     "del": "^3.0.0",
     "devtron": "^1.4.0",
     "electron": "^1.7.5",
-    "electron-builder": "^19.19.1",
+    "electron-builder": "^19.56.2",
     "electron-debug": "^1.4.0",
     "electron-devtools-installer": "^2.2.0",
     "eslint": "^4.4.1",
