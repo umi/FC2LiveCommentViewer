@@ -237,8 +237,8 @@
 							break
 					}
 
-					this.showMessage(options).then((index) => {
-						if (index === 1) {
+					this.showMessage(options).then((obj) => {
+						if (obj.response === 1) {
 							this.$router.push('Config')
 						}
 					})
@@ -318,13 +318,7 @@
 				this.modal = check
 			},
 			showMessage (options) {
-				const promise = new Promise((resolve, reject) => {
-					dialog.showMessageBox(win, options, (index) => {
-						resolve(index)
-					})
-				})
-
-				return promise
+				return dialog.showMessageBox(win, options)
 			}
 		},
 		created: function () {
