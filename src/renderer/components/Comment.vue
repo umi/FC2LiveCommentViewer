@@ -15,7 +15,7 @@
 					<div class="comment_text" v-bind:style="[configStyle.system_comment_text]">{{ comment.comment }}</div>
 				</div>
 				<div v-else class="comment_body" v-bind:style="configStyle.comment_body">
-					<div class="user_name" v-bind:class="{ ng_name: comment.type.indexOf('ngName') !== -1 }" v-bind:style="[userNameStyle, configStyle.user_name]"><span v-bind:style="configStyle.display_index">[{{ comment.index }}] </span>{{ comment.user_name }}</div>
+					<div class="user_name" v-bind:class="{ ng_name: comment.type.indexOf('ngName') !== -1 }" v-bind:style="[userNameStyle, configStyle.user_name]"><span v-bind:style="configStyle.display_index">[{{ comment.index }}] </span><template v-if="formatUserName(comment.user_name).isAnonymous">{{ formatUserName(comment.user_name).name }}<span class="anonymous_num" v-bind:style="configStyle.anonymous_num">{{ formatUserName(comment.user_name).num }}</span></template><template v-else>{{ comment.user_name }}</template></div>
 					<div class="comment_text" v-bind:class="{ ng_keyword: comment.type.indexOf('ngKeyword') !== -1, ng_user: comment.type.indexOf('ngUser') !== -1 }" v-bind:style="[configStyle.comment_text]">{{ comment.comment }}</div>
 				</div>
 			</li>
@@ -117,6 +117,9 @@
 					user_name: {
 						color: '#' + this.$store.getters['Config/style'].nameColor
 					},
+					anonymous_num: {
+						color: '#' + this.$store.getters['Config/style'].anonymousNumberColor
+					},
 					comment_text: {
 						color: '#' + this.$store.getters['Config/style'].commentColor
 					},
@@ -148,6 +151,13 @@
 			}
 		},
 		methods: {
+			formatUserName (userName) {
+				const match = userName.match(/^(匿名)(\(\d+\))$/)
+				if (match) {
+					return { isAnonymous: true, name: match[1], num: match[2] }
+				}
+				return { isAnonymous: false, name: userName }
+			},
 			load () {
 				return new Promise((resolve, reject) => {
 					this.$store.dispatch('Comment/loadComments', {channel: this.channel, token: this.token}).then(([comments, count]) => {
@@ -401,6 +411,10 @@
 		&.ng_name {
 			font-weight: bold;
 			opacity: 0.6;
+		}
+
+		.anonymous_num {
+			font-weight: normal;
 		}
 	}
 	.comment_text {

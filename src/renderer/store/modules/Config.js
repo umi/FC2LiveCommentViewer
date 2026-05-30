@@ -13,7 +13,8 @@ const defaultStyle = {
 	systemBg: 'fceeb6',
 	systemHash: '808080',
 	systemTime: '808080',
-	systemComment: '333333'
+	systemComment: '333333',
+	anonymousNumberColor: '999999'
 }
 const darkStyle = {
 	lineBg: '222222',
@@ -24,7 +25,8 @@ const darkStyle = {
 	systemBg: '555555',
 	systemHash: '808050',
 	systemTime: '808050',
-	systemComment: 'eeee66'
+	systemComment: 'eeee66',
+	anonymousNumberColor: '999999'
 }
 
 var storedStyle = null

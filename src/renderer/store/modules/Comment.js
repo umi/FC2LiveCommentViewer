@@ -109,11 +109,16 @@ class CommentManager {
 const commentManager = new CommentManager()
 
 const state = {
-	commentList: []
+	commentList: [],
+	commentCounter: 0
 }
 
 const mutations = {
 	ADD_COMMENT_LIST (state, list) {
+		list.forEach((comment) => {
+			state.commentCounter++
+			comment.index = state.commentCounter
+		})
 		state.commentList = state.commentList.concat(list)
 	},
 	TRIM_COMMENT_LIST (state, length) {
@@ -121,6 +126,7 @@ const mutations = {
 	},
 	CLEAR_COMMENT_LIST (state) {
 		state.commentList = []
+		state.commentCounter = 0
 	}
 }
 

@@ -62,46 +62,61 @@
 				<div class="input_group color">
 					<div class="label">hash color</div>
 					<input ref="hashColor" @change="changeStyle" type="text" maxlength="6" v-bind:value="style.hashColor">
+					<input type="color" @input="changeColorPicker('hashColor', $event)" v-bind:value="'#' + style.hashColor" class="color_picker">
 				</div>
 
 				<div class="input_group color">
 					<div class="label">time color</div>
 					<input ref="timeColor" @change="changeStyle" type="text" maxlength="6" v-bind:value="style.timeColor">
+					<input type="color" @input="changeColorPicker('timeColor', $event)" v-bind:value="'#' + style.timeColor" class="color_picker">
 				</div>
 
 				<div class="input_group color">
 					<div class="label">name color</div>
 					<input ref="nameColor" @change="changeStyle" type="text" maxlength="6" v-bind:value="style.nameColor">
+					<input type="color" @input="changeColorPicker('nameColor', $event)" v-bind:value="'#' + style.nameColor" class="color_picker">
+				</div>
+
+				<div class="input_group color">
+					<div class="label">anonymous number color</div>
+					<input ref="anonymousNumberColor" @change="changeStyle" type="text" maxlength="6" v-bind:value="style.anonymousNumberColor">
+					<input type="color" @input="changeColorPicker('anonymousNumberColor', $event)" v-bind:value="'#' + style.anonymousNumberColor" class="color_picker">
 				</div>
 
 				<div class="input_group color">
 					<div class="label">comment color</div>
 					<input ref="commentColor" @change="changeStyle" type="text" maxlength="6" v-bind:value="style.commentColor">
+					<input type="color" @input="changeColorPicker('commentColor', $event)" v-bind:value="'#' + style.commentColor" class="color_picker">
 				</div>
 
 				<div class="input_group color">
 					<div class="label">background color</div>
 					<input ref="lineBg" @change="changeStyle" type="text" maxlength="6" v-bind:value="style.lineBg">
+					<input type="color" @input="changeColorPicker('lineBg', $event)" v-bind:value="'#' + style.lineBg" class="color_picker">
 				</div>
 
 				<div class="input_group color">
 					<div class="label">system hash color</div>
 					<input ref="systemHash" @change="changeStyle" type="text" maxlength="6" v-bind:value="style.systemHash">
+					<input type="color" @input="changeColorPicker('systemHash', $event)" v-bind:value="'#' + style.systemHash" class="color_picker">
 				</div>
 
 				<div class="input_group color">
 					<div class="label">system time color</div>
 					<input ref="systemTime" @change="changeStyle" type="text" maxlength="6" v-bind:value="style.systemTime">
+					<input type="color" @input="changeColorPicker('systemTime', $event)" v-bind:value="'#' + style.systemTime" class="color_picker">
 				</div>
 
 				<div class="input_group color">
 					<div class="label">system comment color</div>
 					<input ref="systemComment" @change="changeStyle" type="text" maxlength="6" v-bind:value="style.systemComment">
+					<input type="color" @input="changeColorPicker('systemComment', $event)" v-bind:value="'#' + style.systemComment" class="color_picker">
 				</div>
 
 				<div class="input_group color">
 					<div class="label">system background color</div>
 					<input ref="systemBg" @change="changeStyle" type="text" maxlength="6" v-bind:value="style.systemBg">
+					<input type="color" @input="changeColorPicker('systemBg', $event)" v-bind:value="'#' + style.systemBg" class="color_picker">
 				</div>
 			</div>
 
@@ -112,7 +127,7 @@
 						<div class="time" v-bind:style="configStyle.time">00:00:00</div>
 					</div>
 					<div class="comment_body" v-bind:style="configStyle.comment_body">
-						<div class="user_name" style="width: 60px" v-bind:style="configStyle.user_name">匿名(1)</div>
+						<div class="user_name" style="width: 60px" v-bind:style="configStyle.user_name">匿名<span class="anonymous_num" v-bind:style="configStyle.anonymous_num">(1)</span></div>
 						<div class="comment_text" v-bind:style="configStyle.comment_text">コメントコメントコメント</div>
 					</div>
 				</li>
@@ -174,6 +189,9 @@
 					user_name: {
 						color: '#' + this.$store.getters['Config/style'].nameColor
 					},
+					anonymous_num: {
+						color: '#' + this.$store.getters['Config/style'].anonymousNumberColor
+					},
 					comment_text: {
 						color: '#' + this.$store.getters['Config/style'].commentColor
 					},
@@ -223,10 +241,16 @@
 					systemBg: this.$refs.systemBg.value,
 					systemComment: this.$refs.systemComment.value,
 					systemHash: this.$refs.systemHash.value,
-					systemTime: this.$refs.systemTime.value
+					systemTime: this.$refs.systemTime.value,
+					anonymousNumberColor: this.$refs.anonymousNumberColor.value
 				})
 				this.radio_style_type = '3'
 				this.changeStyleType()
+			},
+			changeColorPicker (refName, event) {
+				const hexColor = event.target.value.replace('#', '')
+				this.$refs[refName].value = hexColor
+				this.changeStyle()
 			},
 			changeStyleType () {
 				this.$store.dispatch('Config/setStyleType', this.radio_style_type)
@@ -459,6 +483,7 @@
 					padding: 2px 8px 0;
 					border-radius: 4px 4px 0 0;
 					user-select: none;
+					white-space: nowrap;
 				}
 
 				input {
@@ -482,8 +507,30 @@
 					left: 10px;
 				}
 
-				&.color input {
+				&.color input[type="text"] {
 					padding-left: 25px;
+					padding-right: 35px;
+				}
+
+				.color_picker {
+					position: absolute;
+					right: 5px;
+					top: 27px;
+					width: 24px;
+					height: 24px;
+					border: none;
+					padding: 0;
+					background: transparent;
+					cursor: pointer;
+					appearance: none;
+
+					&::-webkit-color-swatch-wrapper {
+						padding: 0;
+					}
+					&::-webkit-color-swatch {
+						border: 1px solid #999;
+						border-radius: 4px;
+					}
 				}
 			}
 
@@ -543,6 +590,10 @@
 				margin-right: 10px;
 				overflow: hidden;
 				white-space: nowrap;
+
+				.anonymous_num {
+					font-weight: normal;
+				}
 			}
 			.comment_text {
 				color: #333;
