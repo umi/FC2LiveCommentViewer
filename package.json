@@ -24,8 +24,14 @@
   "build": {
     "productName": "fc2live-comment",
     "appId": "com.f-disc.fc2live-comment",
+    "afterPack": "./scripts/afterPack.js",
     "directories": {
       "output": "build"
+    },
+    "appImage": {
+      "executableArgs": [
+        "--no-sandbox"
+      ]
     },
     "files": [
       "dist/electron/**/*"
@@ -84,7 +90,7 @@
     "del": "^3.0.0",
     "devtron": "^1.4.0",
     "electron": "^9.0.0",
-    "electron-builder": "^19.56.2",
+    "electron-builder": "^24.13.3",
     "electron-debug": "^2.0.0",
     "electron-devtools-installer": "^3.1.1",
     "eslint": "^4.4.1",

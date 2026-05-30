@@ -2,6 +2,10 @@
 
 import { app, BrowserWindow } from 'electron'
 
+if (process.platform === 'linux') {
+	app.commandLine.appendSwitch('no-sandbox')
+}
+
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
